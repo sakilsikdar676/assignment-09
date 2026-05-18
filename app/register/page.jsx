@@ -1,39 +1,31 @@
-'use client';
-import React, { useState } from 'react';
-import { User, Mail, Lock, Eye, EyeOff, Link2 } from 'lucide-react';
+"use client";
+import React, { useState } from "react";
+import { User, Mail, Lock, Eye, EyeOff, Link2 } from "lucide-react";
 import Link from "next/link";
-import { FcGoogle } from 'react-icons/fc';
+import { FcGoogle } from "react-icons/fc";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div 
-      className="relative min-h-screen w-full flex items-center justify-center p-4 bg-cover bg-center overflow-x-hidden"
-      style={{ 
-        // পুরো পেজের মেইন ব্যাকগ্রাউন্ড ইমেজ (যেমনটা বডিতে সেট করেছ)
-        backgroundImage: `url('https://images.pexels.com/photos/18003058/pexels-photo-18003058.jpeg')` 
-      }}
-    >
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm z-0" />
+    <div className="relative min-h-screen w-full flex items-center justify-center p-4 bg-cover bg-center overflow-x-hidden">
+      <div className="absolute inset-0  backdrop-blur-sm z-0" />
 
-      {/* Main Glassmorphic Card Container */}
-      <div className="relative z-10 w-full max-w-md bg-slate-900/40 border border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md">
-        
-        {/* টপ সেকশনের ছোট ইমেজ (গাড়ির ছবি) */}
+      <div className="relative z-10 w-full max-w-md  border border-white/10 bg-slate-900/40 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md">
         <div className="w-full h-40 relative overflow-hidden">
-          <img 
-            src={`https://images.pexels.com/photos/18003058/pexels-photo-18003058.jpeg`} // ওপরের ছোট গাড়ির ইমেজ পাথ
+          <img
+            src={`https://images.pexels.com/photos/18003058/pexels-photo-18003058.jpeg`}
             alt="Register Featured"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
+
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-slate-900  
+                   via-transparent to-transparent"
+          />
         </div>
 
-        {/* Form Content */}
         <div className="p-6 md:p-8 space-y-5">
-          
           <h2 className="text-xl font-bold text-white uppercase tracking-wider text-center lg:text-left">
             Create an Account
           </h2>
@@ -45,8 +37,8 @@ const RegisterPage = () => {
             </label>
             <div className="flex items-center gap-3 bg-slate-950/60 border border-gray-800 rounded-2xl px-4 py-3 focus-within:border-emerald-500 transition">
               <User className="text-gray-500 shrink-0" size={18} />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="John Doe"
                 className="w-full bg-transparent border-none outline-none text-sm text-white placeholder-gray-600 focus:ring-0"
               />
@@ -60,8 +52,8 @@ const RegisterPage = () => {
             </label>
             <div className="flex items-center gap-3 bg-slate-950/60 border border-gray-800 rounded-2xl px-4 py-3 focus-within:border-emerald-500 transition">
               <Mail className="text-gray-500 shrink-0" size={18} />
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="davidjonson@gmail.com"
                 className="w-full bg-transparent border-none outline-none text-sm text-white placeholder-gray-600 focus:ring-0"
               />
@@ -75,8 +67,8 @@ const RegisterPage = () => {
             </label>
             <div className="flex items-center gap-3 bg-slate-950/60 border border-gray-800 rounded-2xl px-4 py-3 focus-within:border-emerald-500 transition">
               <Link2 className="text-gray-500 shrink-0" size={18} />
-              <input 
-                type="url" 
+              <input
+                type="url"
                 placeholder="https://example.com/avatar.jpg"
                 className="w-full bg-transparent border-none outline-none text-sm text-white placeholder-gray-600 focus:ring-0"
               />
@@ -90,12 +82,12 @@ const RegisterPage = () => {
             </label>
             <div className="flex items-center gap-3 bg-slate-950/60 border border-gray-800 rounded-2xl px-4 py-3 focus-within:border-emerald-500 transition">
               <Lock className="text-gray-500 shrink-0" size={18} />
-              <input 
-                type={showPassword ? "text" : "password"} 
+              <input
+                type={showPassword ? "text" : "password"}
                 placeholder="••••••••••••"
                 className="w-full bg-transparent border-none outline-none text-sm text-white placeholder-gray-600 focus:ring-0"
               />
-              <button 
+              <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="text-gray-500 hover:text-white transition"
@@ -107,12 +99,15 @@ const RegisterPage = () => {
 
           {/* Terms & Conditions Checkbox */}
           <div className="flex items-center gap-2.5 pt-1">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               id="terms"
               className="w-4 h-4 rounded bg-slate-950 border-gray-800 text-emerald-500 focus:ring-0 focus:ring-offset-0 transition cursor-pointer"
             />
-            <label htmlFor="terms" className="text-xs text-gray-400 select-none cursor-pointer">
+            <label
+              htmlFor="terms"
+              className="text-xs text-gray-400 select-none cursor-pointer"
+            >
               I agree to all Terms & Conditions and Privacy Policy
             </label>
           </div>
@@ -136,15 +131,13 @@ const RegisterPage = () => {
           <div>
             <button className="flex items-center justify-center gap-2.5 py-2.5 bg-slate-950/40 hover:bg-slate-950/80 border border-gray-800 rounded-xl text-sm font-medium text-white transition active:scale-95 w-full">
               <FcGoogle className="text-3xl" />
-              <span className='text-xl'>Google</span>
+              <span className="text-xl">Google</span>
             </button>
-            
-            
           </div>
 
           {/* Footer Text */}
           <p className="text-center text-xs text-gray-500 pt-1">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <Link
               href="/login"
               className="text-emerald-400 hover:underline font-medium"
@@ -152,7 +145,6 @@ const RegisterPage = () => {
               login
             </Link>
           </p>
-
         </div>
       </div>
     </div>

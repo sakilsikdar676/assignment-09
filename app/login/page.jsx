@@ -11,30 +11,27 @@ const AuthPage = () => {
   return (
     <div
       className="relative min-h-screen w-full flex items-center justify-center p-4 bg-cover bg-center overflow-x-hidden"
-      style={{
-        // ১. পুরো পেজের মেইন ব্যাকগ্রাউন্ড ইমেজ এখানে বসাবে
-        backgroundImage: `url('https://cdn.pixabay.com/photo/2024/08/19/10/15/ai-generated-8980377_1280.jpg')`,
-      }}
+      
     >
-      {/* Dark Overlay জেনারেট করা ছবির মতো ডার্ক ভাইব আনার জন্য */}
-      <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm z-0" />
+      
+      <div className="absolute inset-0  backdrop-blur-sm z-0" />
 
-      {/* Main Glassmorphic Card Container */}
+    
       <div className="relative z-10 w-full max-w-md bg-slate-900/40 border border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md">
-        {/* ২. ফর্মের ওপরের ছোট ইমেজ সেকশন */}
+     
         <div className="w-full h-44 relative overflow-hidden">
           <img
             src={`https://cdn.pixabay.com/photo/2024/08/19/10/15/ai-generated-8980377_1280.jpg`} // এখানে ওপরের ছোট গাড়ির ইমেজ পাথ দিবে
             alt="Featured Car"
             className="w-full h-full object-cover"
           />
-          {/* ইমেজ থেকে নিচের ফর্মে স্মুথলি ব্লেন্ড হওয়ার জন্য গ্রেডিয়েন্ট শেড */}
+          
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
         </div>
 
-        {/* Input Form Content */}
+      
         <div className="p-6 md:p-8 space-y-6">
-          {/* Email Field */}
+        
           <div className="space-y-2">
             <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">
               Email Address
@@ -49,7 +46,7 @@ const AuthPage = () => {
             </div>
           </div>
 
-          {/* New Password Field */}
+         
           <div className="space-y-2">
             <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">
               Password

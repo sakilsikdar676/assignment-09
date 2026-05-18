@@ -26,7 +26,6 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="relative min-h-screen text-white bg-[#000814] overflow-x-hidden">
-        
         {/* --- FULL BODY BACKGROUND GLOWS --- */}
         {/* Main Gradient Background */}
         <div className="fixed inset-0 bg-gradient-to-br from-[#000814] via-[#001d3d] to-[#000814] -z-50" />
@@ -40,14 +39,46 @@ export default function RootLayout({ children }) {
         {/* Extra Glow (Middle/Bottom) */}
         <div className="fixed left-1/3 top-1/2 h-[400px] w-[400px] rounded-full bg-indigo-500/10 blur-[120px] -z-50 pointer-events-none" />
         {/* --------------------------------- */}
+        {/* --- ১০টি অ্যানিমেটেড ব্যাকগ্রাউন্ড বল (Floating Spheres) --- */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+          
+          {/* বল ১ (টপ লেফট - স্লো) */}
+          <div className="absolute top-[10%] left-[5%] w-44 h-44 rounded-full bg-gradient-to-tr from-lightLime to-darkBlue opacity-20 blur-xs animate-float-slow"></div>
+          
+          {/* বল ২ (বটম রাইট - মিডিয়াম) */}
+          <div className="absolute bottom-[15%] right-[10%] w-64 h-64 rounded-full bg-gradient-to-bl from-darkBlue via-lightLime to-darkBlue opacity-15 blur-md animate-float-medium"></div>
+          
+          {/* বল ৩ (মিডল সেন্টার - ফাস্ট) */}
+          <div className="absolute top-[45%] left-[40%] w-32 h-32 rounded-full bg-gradient-to-br from-lightLime to-transparent opacity-20 blur-sm animate-float-fast"></div>
+          
+          {/* বল ৪ (বটম লেফট - স্লো) */}
+          <div className="absolute bottom-[10%] left-[8%] w-52 h-52 rounded-full bg-gradient-to-r from-cyan-500 to-lightLime opacity-15 blur-lg animate-float-slow"></div>
 
+          {/* বল ৫ (টপ রাইট - ফাস্ট) */}
+          <div className="absolute top-[8%] right-[20%] w-36 h-36 rounded-full bg-gradient-to-l from-lightLime via-cyan-500 to-transparent opacity-20 blur-xs animate-float-fast"></div>
+
+          {/* বল ৬ (মিডল লেফট - মিডিয়াম) */}
+          <div className="absolute top-[35%] left-[2%] w-40 h-40 rounded-full bg-gradient-to-b from-transparent via-lightLime to-darkBlue opacity-15 blur-sm animate-float-medium"></div>
+
+          {/* বল ৭ (সেন্টার রাইট - স্লো) */}
+          <div className="absolute top-[50%] right-[5%] w-56 h-56 rounded-full bg-gradient-to-tr from-darkBlue to-lightLime opacity-10 blur-md animate-float-slow"></div>
+
+          {/* বল ৮ (একদম নিচে বামে - মিডিয়াম) */}
+          <div className="absolute bottom-[2%] left-[30%] w-28 h-28 rounded-full bg-gradient-to-tl from-lightLime to-cyan-400 opacity-25 blur-xs animate-float-medium"></div>
+
+          {/* বল ৯ (একদম উপরে সেন্টারে - ফাস্ট) */}
+          <div className="absolute top-[2%] left-[55%] w-24 h-24 rounded-full bg-gradient-to-r from-lightLime to-darkBlue opacity-20 blur-none animate-float-fast"></div>
+
+          {/* বল ১০ (মিডল বটম রাইট - স্লো) */}
+          <div className="absolute bottom-[35%] right-[30%] w-48 h-48 rounded-full bg-gradient-to-br from-cyan-600 via-transparent to-lightLime opacity-15 blur-sm animate-float-slow"></div>
+
+        </div>
         {/* আপনার ওয়েবসাইটের বাকি সব পেজ এখানে রেন্ডার হবে */}
         <main className="relative z-10">
           <Navbar />
           {children}
           <Footer />
         </main>
-
       </body>
     </html>
   );

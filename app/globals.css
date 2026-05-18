@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 
-@import "tailwindcss";
+
 
 /* Tailwind CSS v4 এর জন্য কাস্টম কালার এবং অ্যানিমেশন সেটআপ */
 @theme {
@@ -26,6 +26,10 @@
     0%, 100% { transform: translate(0px, 0px) scale(0.9); }
     50% { transform: translate(40vw, -30vh) scale(1.1); }
   }
+}
+
+.active{
+  color: var(--color-lightLime);
 }
 
 :root {

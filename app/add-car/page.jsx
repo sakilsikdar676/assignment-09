@@ -1,33 +1,44 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
+// import { successToast } from "../utils-toast/toast";
+// import { successToast } from "@/app/utils-toast/utils/toast";
+// import { successToast } from "@/app/utils-toast/toast";
+import { errorToast, successToast } from "../utils-toast/toast";
+
+
 
 const AddCar = () => {
-  const [formData, setFormData] = useState({
-    carName: '',
-    dailyPrice: '',
-    carType: 'SUV',
-    imageUrl: '',
-    seatCapacity: '',
-    pickupLocation: '',
-    description: '',
-    availabilityStatus: 'Available',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted Car Data:', formData);
-    // এখানে আপনার API কল বা Better-Auth এর সাথে ডাটাবেজে পাঠানোর লজিক লিখবেন
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
+
+    const res = await fetch(`http://localhost:8000/cars`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    
+
+    if (result.insertedId) {
+     successToast('car added successfully');
+      event.target.reset();
+    }else if(!result.insertedId){
+      errorToast('something went wrong')
+    }
+    
+
   };
+  
 
   return (
     <div className="relative min-h-screen w-full  text-white flex items-center justify-center p-4 overflow-hidden">
-      
       {/* --- অ্যানিমেটেড ব্যাকগ্রাউন্ড বল (Floating Spheres) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* বল ১ - Light Lime Gradient */}
@@ -42,40 +53,40 @@ const AddCar = () => {
 
       {/* --- মেইন গ্লাস morfism ফর্ম কার্ড --- */}
       <div className="relative z-10 w-full max-w-2xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-3xl shadow-2xl transition-all duration-300 hover:border-white/20">
-        
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold tracking-wide text-white">
             Add New <span className="text-[#CCFF00]">Car Listing</span>
           </h2>
-          <p className="text-gray-400 text-sm mt-2">Fill up the details to list your car for rent</p>
+          <p className="text-gray-400 text-sm mt-2">
+            Fill up the details to list your car for rent
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleFormSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
             {/* Car Name */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Car Name</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Car Name
+              </label>
               <input
                 type="text"
                 name="carName"
                 required
-                value={formData.carName}
-                onChange={handleChange}
-                placeholder="e.g., Tesla Model X"
+                placeholder="enter car name"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
             </div>
 
             {/* Daily Rent Price */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Daily Rent Price ($)</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Daily Rent Price ($)
+              </label>
               <input
                 type="number"
                 name="dailyPrice"
                 required
-                value={formData.dailyPrice}
-                onChange={handleChange}
                 placeholder="e.g., 99"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
@@ -83,30 +94,40 @@ const AddCar = () => {
 
             {/* Car Type */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Car Type</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Car Type
+              </label>
               <select
                 name="carType"
-                value={formData.carType}
-                onChange={handleChange}
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200"
               >
-                <option value="SUV" className="bg-[#0A192F]">SUV</option>
-                <option value="Sedan" className="bg-[#0A192F]">Sedan</option>
-                <option value="Hatchback" className="bg-[#0A192F]">Hatchback</option>
-                <option value="Luxury" className="bg-[#0A192F]">Luxury</option>
-                <option value="Crossover" className="bg-[#0A192F]">Crossover</option>
+                <option value="SUV" className="bg-[#0A192F]">
+                  SUV
+                </option>
+                <option value="Sedan" className="bg-[#0A192F]">
+                  Sedan
+                </option>
+                <option value="Hatchback" className="bg-[#0A192F]">
+                  Hatchback
+                </option>
+                <option value="Luxury" className="bg-[#0A192F]">
+                  Luxury
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Crossover
+                </option>
               </select>
             </div>
 
             {/* Seat Capacity */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Seat Capacity</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Seat Capacity
+              </label>
               <input
                 type="number"
                 name="seatCapacity"
                 required
-                value={formData.seatCapacity}
-                onChange={handleChange}
                 placeholder="e.g., 5"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
@@ -114,13 +135,13 @@ const AddCar = () => {
 
             {/* Image URL */}
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Image URL (imgbb/postimage)</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Image URL (imgbb/postimage)
+              </label>
               <input
                 type="url"
                 name="imageUrl"
                 required
-                value={formData.imageUrl}
-                onChange={handleChange}
                 placeholder="https://i.ibb.co/your-image-id.jpg"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
@@ -128,13 +149,14 @@ const AddCar = () => {
 
             {/* Pickup Location */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Pickup Location</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Pickup Location
+              </label>
               <input
                 type="text"
                 name="pickupLocation"
                 required
-                value={formData.pickupLocation}
-                onChange={handleChange}
+                
                 placeholder="e.g., Dhaka, Bangladesh"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
@@ -142,32 +164,39 @@ const AddCar = () => {
 
             {/* Availability Status */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Availability Status</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Availability Status
+              </label>
               <select
                 name="availabilityStatus"
-                value={formData.availabilityStatus}
-                onChange={handleChange}
+               
+                
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200"
               >
-                <option value="Available" className="bg-[#0A192F]">Available</option>
-                <option value="Unavailable" className="bg-[#0A192F]">Unavailable</option>
+                <option value="Available" className="bg-[#0A192F]">
+                  Available
+                </option>
+                <option value="Unavailable" className="bg-[#0A192F]">
+                  Unavailable
+                </option>
               </select>
             </div>
 
             {/* Description */}
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Description</label>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Description
+              </label>
               <textarea
                 name="description"
                 required
                 rows="3"
-                value={formData.description}
-                onChange={handleChange}
+                
+               
                 placeholder="Write something about the car's condition, features, etc..."
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500 resize-none"
               ></textarea>
             </div>
-
           </div>
 
           {/* Submit Button */}
@@ -179,7 +208,6 @@ const AddCar = () => {
               Submit Car Listing
             </button>
           </div>
-
         </form>
       </div>
     </div>

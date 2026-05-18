@@ -1,14 +1,8 @@
-'use client'
+"use client";
 
-// import { successToast } from "../utils-toast/toast";
-// import { successToast } from "@/app/utils-toast/utils/toast";
-// import { successToast } from "@/app/utils-toast/toast";
 import { errorToast, successToast } from "../utils-toast/toast";
 
-
-
 const AddCar = () => {
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -24,18 +18,14 @@ const AddCar = () => {
       body: JSON.stringify(data),
     });
     const result = await res.json();
-    
 
     if (result.insertedId) {
-     successToast('car added successfully');
+      successToast("car added successfully");
       event.target.reset();
-    }else if(!result.insertedId){
-      errorToast('something went wrong')
+    } else if (!result.insertedId) {
+      errorToast("something went wrong");
     }
-    
-
   };
-  
 
   return (
     <div className="relative min-h-screen w-full  text-white flex items-center justify-center p-4 overflow-hidden">
@@ -91,6 +81,18 @@ const AddCar = () => {
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
             </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                Car Model
+              </label>
+              <input
+                type="text"
+                name="carModel"
+                required
+                placeholder="enter car model"
+                className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
+              />
+            </div>
 
             {/* Car Type */}
             <div>
@@ -115,6 +117,21 @@ const AddCar = () => {
                 </option>
                 <option value="Crossover" className="bg-[#0A192F]">
                   Crossover
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Sports
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Van
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Convertible
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Hybrid
+                </option>
+                <option value="Crossover" className="bg-[#0A192F]">
+                  Truck
                 </option>
               </select>
             </div>
@@ -156,7 +173,6 @@ const AddCar = () => {
                 type="text"
                 name="pickupLocation"
                 required
-                
                 placeholder="e.g., Dhaka, Bangladesh"
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500"
               />
@@ -169,8 +185,6 @@ const AddCar = () => {
               </label>
               <select
                 name="availabilityStatus"
-               
-                
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200"
               >
                 <option value="Available" className="bg-[#0A192F]">
@@ -191,8 +205,6 @@ const AddCar = () => {
                 name="description"
                 required
                 rows="3"
-                
-               
                 placeholder="Write something about the car's condition, features, etc..."
                 className="w-full bg-[#0D2342] border border-gray-700 focus:border-[#CCFF00] rounded-xl px-4 py-3 text-white outline-none transition-all duration-200 placeholder-gray-500 resize-none"
               ></textarea>

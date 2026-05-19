@@ -2,6 +2,7 @@ import { FaGasPump, FaCarSide } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 
 import { FaUserGroup } from "react-icons/fa6";
+import Link from "next/link";
 
 export default function CarCard({ car }) {
   const typeStyles = {
@@ -79,10 +80,12 @@ export default function CarCard({ car }) {
         </div>
 
         {/* View Details Button */}
-        <button className="flex items-center gap-2 rounded-xl bg-lime-400 px-3 py-2.5 font-semibold text-black shadow-lg shadow-lime-400/30 transition hover:scale-105">
-          View Details
-          <FiArrowRight className="text-base" />
-        </button>
+        <Link href={`/explore-cars/${car._id}`}>
+          <button className="flex items-center gap-2 rounded-xl bg-lime-400 px-3 py-2.5 font-semibold text-black shadow-lg shadow-lime-400/30 transition hover:scale-105">
+            View Details
+            <FiArrowRight className="text-base" />
+          </button>
+        </Link>
       </div>
     </div>
   );

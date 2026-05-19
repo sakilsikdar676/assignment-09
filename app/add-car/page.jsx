@@ -21,6 +21,7 @@ const AddCar = () => {
 
     if (result.insertedId) {
       successToast("car added successfully");
+
       event.target.reset();
     } else if (!result.insertedId) {
       errorToast("something went wrong");

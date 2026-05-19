@@ -11,7 +11,7 @@ export default function PremiumNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-50 z-10 mx-auto max-w-7xl px-4 py-4 md:px-8">
+    <div className="sticky top-0 z-50 mx-auto max-w-7xl px-4 py-4 md:px-8">
       <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
@@ -122,7 +122,7 @@ export default function PremiumNavbar() {
           <div className="flex flex-col gap-3">
             <MobileNav href="/">Home</MobileNav>
 
-            <MobileNav href="/cars">Explore Cars</MobileNav>
+            <MobileNav href="/explore-cars">Explore Cars</MobileNav>
 
             <MobileNav href="/add-car">Add Car</MobileNav>
 

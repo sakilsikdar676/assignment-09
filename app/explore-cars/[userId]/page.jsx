@@ -1,4 +1,6 @@
+import { Default, DeleteAlart } from "@/app/components/DeleteAlart";
 import { EditModal } from "@/app/components/EditModal";
+import { AlertDialog, Button } from "@heroui/react";
 
 import { GoArrowUpRight } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
@@ -88,9 +90,7 @@ const CarDetailPage = async ({ params }) => {
                 Book Now <GoArrowUpRight />
               </button>
 
-              <button className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-darkblue-600 hover:bg-[#c91717] rounded-md transition-colors duration-300 shadow-sm shadow-red-600">
-                Delete <MdDelete />
-              </button>
+              <DeleteAlart carId={userId} carData={carData} />
             </div>
           </div>
         </div>

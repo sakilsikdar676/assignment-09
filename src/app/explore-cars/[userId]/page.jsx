@@ -1,5 +1,5 @@
-import { Default, DeleteAlart } from "@/app/components/DeleteAlart";
-import { EditModal } from "@/app/components/EditModal";
+import { Default, DeleteAlart } from "@/src/app/components/DeleteAlart";
+import { EditModal } from "@/src/app/components/EditModal";
 import { AlertDialog, Button } from "@heroui/react";
 
 import { GoArrowUpRight } from "react-icons/go";

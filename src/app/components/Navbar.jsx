@@ -4,11 +4,27 @@ import Link from "next/link";
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { authClient } from "@/src/lib/auth-client";
 
 export default function PremiumNavbar() {
   // Demo Auth State
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const {
+    data : session,
+    
+  }= authClient.useSession();
+  
+  const user = session?.user;
+  console.log(user);
+
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  }
+
+  
 
   return (
     <div className="sticky top-0 z-50 mx-auto max-w-7xl px-4 py-4 md:px-8">
@@ -46,7 +62,7 @@ export default function PremiumNavbar() {
 
         {/* Right Side */}
         <div className="hidden lg:flex items-center gap-4">
-          {!isLoggedIn ? (
+          {!user? (
             <>
               <Link
                 href="/login"
@@ -67,18 +83,19 @@ export default function PremiumNavbar() {
               {/* Profile Button */}
               <div className="flex items-center gap-3 rounded-2xl  shadow-lg shadow-lime-400/30 px-3 py-2 text-white  transition ">
                 <img
-                  src={`https://cdn.pixabay.com/photo/2024/08/19/10/15/ai-generated-8980377_1280.jpg`}
+                  referrerPolicy="no-referrer"
+                  src={user.image}
                   alt="profile"
                   className="rounded-full  border-2 border-lime-400/50 h-15 w-15"
                 />
 
                 <div className="text-left">
-                  <p className="text-sm font-semibold">Masrul Islam</p>
+                  <p className="text-sm font-semibold">{user.name}</p>
 
-                  <p className="text-xs text-gray-400">Premium Member</p>
+                  {/* <p className="text-[10px] text-gray-400">{user.email}</p> */}
                 </div>
                 <button
-                  onClick={() => setIsLoggedIn(false)}
+                  onClick={handleSignOut}
                   className="flex  items-center  rounded-2xl px-4 py-3 text-red-400 bg-red-500/10 transition hover:bg-red-500/20"
                 >
                   Logout
@@ -90,7 +107,7 @@ export default function PremiumNavbar() {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 lg:hidden">
-          {!isLoggedIn ? (
+          {!user ? (
             <div className="hidden">
               <img
                 src={`https://cdn.pixabay.com/photo/2024/08/19/10/15/ai-generated-8980377_1280.jpg`}
@@ -101,7 +118,7 @@ export default function PremiumNavbar() {
           ) : (
             <div className=" lg:hidden">
               <img
-                src={`https://cdn.pixabay.com/photo/2024/08/19/10/15/ai-generated-8980377_1280.jpg`}
+                src={user.image}
                 alt="profile"
                 className="rounded-full  border-2 border-lime-400/50 h-15 w-15"
               />
@@ -128,7 +145,7 @@ export default function PremiumNavbar() {
 
             <MobileNav href="/bookings">My Bookings</MobileNav>
 
-            {!isLoggedIn ? (
+            {!user ? (
               <>
                 <MobileNav href="/login">Login</MobileNav>
 
@@ -144,7 +161,7 @@ export default function PremiumNavbar() {
                 <MobileNav href="/my-cars">My Added Cars</MobileNav>
 
                 <button
-                  onClick={() => setIsLoggedIn(false)}
+                  onClick={handleSignOut}
                   className="rounded-2xl bg-red-500/10 px-4 py-3 text-left text-red-400"
                 >
                   Logout

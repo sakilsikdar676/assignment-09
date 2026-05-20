@@ -24,7 +24,7 @@ export function EditModal({ carId, carData }) {
       }
     });
 
-    try {
+    
       const res = await fetch(`http://localhost:8000/cars/${carId}`, {
         method: "PATCH",
         headers: {
@@ -42,10 +42,7 @@ export function EditModal({ carId, carData }) {
       } else {
         errorToast("No changes were made");
       }
-    } catch (error) {
-      console.error(error);
-      errorToast("Something went wrong");
-    }
+   
   };
 
   return (

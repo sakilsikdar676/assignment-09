@@ -1,4 +1,4 @@
-import banner from "../../public/banner.png";
+import banner from "../../../public/banner.png";
 import { MapPin, Calendar, Sparkles } from "lucide-react";
 
 const HeroSection = () => {

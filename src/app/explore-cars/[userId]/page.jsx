@@ -88,7 +88,7 @@ const CarDetailPage = async ({ params }) => {
             <div className="flex flex-wrap items-center gap-4 max-w-md">
               {/* Add To Cart Button with Premium Hover Effect */}
               <div className="flex items-center justify-center gap-2 ">
-               <BookingModal /> 
+               <BookingModal carId={userId} carData={carData} /> 
               </div>
 
               <DeleteAlart carId={userId} carData={carData} />

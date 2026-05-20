@@ -11,20 +11,13 @@ export default function PremiumNavbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const {
-    data : session,
-    
-  }= authClient.useSession();
-  
+  const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
-
+  
 
   const handleSignOut = async () => {
     await authClient.signOut();
-  }
-
-  
+  };
 
   return (
     <div className="sticky top-0 z-50 mx-auto max-w-7xl px-4 py-4 md:px-8">
@@ -62,7 +55,7 @@ export default function PremiumNavbar() {
 
         {/* Right Side */}
         <div className="hidden lg:flex items-center gap-4">
-          {!user? (
+          {!user ? (
             <>
               <Link
                 href="/login"
@@ -206,6 +199,3 @@ function MobileNav({ href, children }) {
     </Link>
   );
 }
-
-
-

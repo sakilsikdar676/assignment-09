@@ -1,36 +1,68 @@
 "use client";
 
+import { authClient } from "@/src/lib/auth-client";
 import { useState } from "react";
+import { successToast } from "../utils-toast/toast";
 
-export default function BookingModal() {
-  // মোডাল ওপেন/ক্লোজ করার স্টেট
+export default function BookingModal({ carId, carData }) {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const {
+    carType,
+    carName,
+    dailyPrice,
+    imageUrl,
+    description,
+    seatCapacity,
+    pickupLocation,
+  } = carData;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // ডাটাবেজের সাথে কানেক্ট করার ফর্ম স্টেট
+
   const [driverNeeded, setDriverNeeded] = useState("No");
   const [specialNote, setSpecialNote] = useState("");
 
-  const handleBookingSubmit = (e) => {
+  const handleBookingSubmit = async (e) => {
     e.preventDefault();
-    
-    // ডাটাবেজ বা API এর সাথে কানেক্ট করার অবজেক্ট
+
     const bookingData = {
       driverNeeded: driverNeeded,
       specialNote: specialNote,
+      carId: carId,
+      userId: user.id,
+      carType: carType,
+      carName: carName,
+      dailyPrice: dailyPrice,
+      imageUrl: imageUrl,
+      description: description,
+      seatCapacity: seatCapacity,
+      pickupLocation: pickupLocation,
+      driverNeeded: driverNeeded,
+      specialNote: specialNote,
     };
-    
-    console.log("Submitting to Database:", bookingData);
-    alert("Booking successfully submitted to database!");
-    
-    // সাবমিট হওয়ার পর মোডাল বন্ধ করা এবং ফর্ম রিসেট করা
+
     setIsModalOpen(false);
     setSpecialNote("");
     setDriverNeeded("No");
+
+    const res = await fetch(`http://localhost:8000/booking`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    });
+    const result = await res.json();
+    console.log(result);
+
+    if (result.insertedId) {
+      successToast("Car Booking successfully");
+    }
   };
 
   return (
     <div className="flex justify-center items-center py-4">
-      
       {/* ১. প্রধান বুক নাও বাটন (যেটাতে ক্লিক করলে মোডাল ওপেন হবে) */}
       <button
         onClick={() => setIsModalOpen(true)}
@@ -42,10 +74,8 @@ export default function BookingModal() {
       {/* ২. মোডাল পপআপ সেকশন */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          
           {/* মোডালের ভেতরের মূল কার্ড */}
           <div className="w-full max-w-md bg-[#0d1520]/95 border border-gray-800 rounded-3xl p-6 shadow-[0_0_50px_rgba(163,230,53,0.15)] relative animate-in zoom-in-95 duration-200">
-            
             {/* ক্লোজ বাটন (X) */}
             <button
               onClick={() => setIsModalOpen(false)}
@@ -67,7 +97,6 @@ export default function BookingModal() {
 
             {/* বুকিং ফরম */}
             <form onSubmit={handleBookingSubmit} className="space-y-5">
-              
               {/* Driver Needed (Lime Toggle) */}
               <div>
                 <label className="block text-xs font-semibold text-lime-400 uppercase tracking-wider mb-2">
@@ -143,7 +172,6 @@ export default function BookingModal() {
                   Confirm Ride
                 </button>
               </div>
-
             </form>
           </div>
         </div>

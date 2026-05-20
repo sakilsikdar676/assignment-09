@@ -4,6 +4,7 @@ import { AlertDialog, Button } from "@heroui/react";
 
 import { GoArrowUpRight } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
+import BookingModal from "../../components/BookingCard";
 
 const CarDetailPage = async ({ params }) => {
   const { userId } = await params;
@@ -86,9 +87,9 @@ const CarDetailPage = async ({ params }) => {
             {/* Actions: Quantity + Add To Cart */}
             <div className="flex flex-wrap items-center gap-4 max-w-md">
               {/* Add To Cart Button with Premium Hover Effect */}
-              <button className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-darkblue-600 hover:bg-[#6bc417] rounded-md transition-colors duration-300 shadow-sm shadow-lime-600">
-                Book Now <GoArrowUpRight />
-              </button>
+              <div className="flex items-center justify-center gap-2 ">
+               <BookingModal /> 
+              </div>
 
               <DeleteAlart carId={userId} carData={carData} />
             </div>

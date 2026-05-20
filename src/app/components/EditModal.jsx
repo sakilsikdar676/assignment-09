@@ -50,7 +50,7 @@ export function EditModal({ carId, carData }) {
       {/* এডিট বাটন */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-darkblue-600 hover:bg-[#6bc417] rounded-md transition-colors duration-300 shadow-sm shadow-lime-600"
+        className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-darkblue-600 hover:bg-[#6bc417] rounded-md transition-colors duration-300 shadow-sm shadow-lime-600 transition-all duration-300 shadow-[0_0_20px_rgba(163,230,53,0.3)] hover:shadow-[0_0_25px_rgba(163,230,53,0.5)] transform active:scale-[0.98]"
       >
         Edit <FaEdit />
       </button>

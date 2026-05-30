@@ -1,6 +1,7 @@
 import { auth } from "@/src/lib/auth";
 import { headers } from "next/headers";
 import { CancalBookingAlart } from "../components/CencalBookingAlart";
+import Link from "next/link";
 
 const MyBookingsPage = async () => {
   const session = await auth.api.getSession({
@@ -29,11 +30,43 @@ const MyBookingsPage = async () => {
         My Bookings
       </h2>
 
-      {/* বুকিং লিস্ট খালি থাকলে এটি দেখাবে */}
       {carData?.length === 0 && (
-        <p className="text-gray-500 text-sm text-center py-10">
-          No bookings found.
-        </p>
+        <div className="flex items-center justify-center min-h-[60vh] px-4">
+          <div className="max-w-2xl w-full text-center border border-white/10 bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(59,130,246,0.08)]">
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-5xl">
+                📅
+              </div>
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              No Bookings Yet
+            </h2>
+
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-8">
+              Looks like you haven't booked any cars yet. Explore our collection
+              of premium vehicles and reserve the perfect ride for your next
+              journey.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/explore-cars"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]"
+              >
+                Explore Cars
+                <span>→</span>
+              </Link>
+
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-white font-semibold text-sm uppercase tracking-wider transition-all duration-300 hover:bg-white/10"
+              >
+                Back Home
+              </Link>
+            </div>
+          </div>
+        </div>
       )}
 
       <div className="space-y-6 grid grid-cols-1 lg:grid-cols-2  gap-6">
@@ -42,9 +75,7 @@ const MyBookingsPage = async () => {
             key={car._id || car.id}
             className="w-full max-w-2xl mx-auto bg-[#0d1520]/80 backdrop-blur-md border border-gray-800 rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-lime-500/30 hover:shadow-[0_0_40px_rgba(163,230,53,0.1)] flex flex-col sm:flex-row"
           >
-            {/* ১. কার ইমেজ সেকশন */}
             <div className="w-full sm:w-2/5 relative min-h-[180px] sm:min-h-full bg-gray-900">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={
                   car.imageUrl ||
@@ -58,11 +89,9 @@ const MyBookingsPage = async () => {
               </span>
             </div>
 
-            {/* ২. কার ইনফরমেশন ও ডিটেইলস সেকশন */}
             <div className="w-full sm:w-3/5 p-5 flex flex-col justify-between space-y-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  {/* 🛠️ এখানে car.carName এর বদলে car.name করা হয়েছে */}
                   <h3 className="text-lg font-bold text-gray-200 tracking-wide">
                     {car.carName || "Unknown Car"}
                   </h3>
@@ -74,7 +103,6 @@ const MyBookingsPage = async () => {
                 </span>
               </div>
 
-              {/* স্পেসিফিকেশন ও কন্ডিশন গ্রিড */}
               <div className="grid grid-cols-2 gap-3 p-3 bg-gray-950/40 border border-gray-800/50 rounded-xl">
                 <div>
                   <span className="block text-[10px] text-gray-500 uppercase font-semibold">
@@ -93,13 +121,11 @@ const MyBookingsPage = async () => {
                     Total Cost
                   </span>
                   <span className="text-xs font-bold text-gray-200">
-                    {/* যদি ডাটাবেজে প্রাইস সেভ থাকে */}$
-                    {car.dailyPrice || "45.00"} / day
+                    ${car.dailyPrice || "45.00"} / day
                   </span>
                 </div>
               </div>
 
-              {/* ইউজার স্পেশাল নোট */}
               {car.specialNote && (
                 <div className="p-2.5 bg-gray-900/40 border-l-2 border-lime-500 rounded-r-lg">
                   <span className="block text-[10px] uppercase font-bold text-lime-400 tracking-wider">
@@ -111,10 +137,8 @@ const MyBookingsPage = async () => {
                 </div>
               )}
 
-              {/* অ্যাকশন বাটনসমূহ */}
               <div className="flex items-center justify-between gap-3 pt-2 border-t border-gray-800/60">
-              <CancalBookingAlart bookingId={car._id} />
-                
+                <CancalBookingAlart bookingId={car._id} />
               </div>
             </div>
           </div>

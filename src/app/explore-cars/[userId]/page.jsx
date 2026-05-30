@@ -1,9 +1,6 @@
 import { Default, DeleteAlart } from "@/src/app/components/DeleteAlart";
 import { EditModal } from "@/src/app/components/EditModal";
-import { AlertDialog, Button } from "@heroui/react";
 
-import { GoArrowUpRight } from "react-icons/go";
-import { MdDelete } from "react-icons/md";
 import BookingModal from "../../components/BookingCard";
 
 const CarDetailPage = async ({ params }) => {
@@ -47,7 +44,6 @@ const CarDetailPage = async ({ params }) => {
               <h1 className="text-2xl md:text-3xl font-normal text-[#c5a880] tracking-wide">
                 {carName}
               </h1>
-              <EditModal carId={userId} carData={carData} />
             </div>
 
             {/* Price */}
@@ -88,10 +84,8 @@ const CarDetailPage = async ({ params }) => {
             <div className="flex flex-wrap items-center gap-4 max-w-md">
               {/* Add To Cart Button with Premium Hover Effect */}
               <div className="flex items-center justify-center gap-2 ">
-               <BookingModal carId={userId} carData={carData} /> 
+                <BookingModal carId={userId} carData={carData} />
               </div>
-
-              <DeleteAlart carId={userId} carData={carData} />
             </div>
           </div>
         </div>

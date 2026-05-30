@@ -1,21 +1,34 @@
 "use client";
 
+import { authClient } from "@/src/lib/auth-client";
 import { errorToast, successToast } from "../utils-toast/toast";
 
 const AddCar = () => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
+    const carData = {
+      ...data,
+
+      userId: user?.id,
+      userEmail: user?.email,
+      userName: user?.name,
+      userImage: user?.image,
+    };
+    console.log(carData);
 
     const res = await fetch(`http://localhost:8000/cars`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(carData),
     });
     const result = await res.json();
 
@@ -30,7 +43,6 @@ const AddCar = () => {
 
   return (
     <div className="relative min-h-screen w-full  text-white flex items-center justify-center p-4 overflow-hidden">
-      {/* --- অ্যানিমেটেড ব্যাকগ্রাউন্ড বল (Floating Spheres) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* বল ১ - Light Lime Gradient */}
         <div className="absolute top-[10%] left-[10%] w-48 h-48 rounded-full bg-gradient-to-tr from-[#CCFF00] to-[#0A192F] opacity-30 blur-sm animate-float-slow"></div>
@@ -42,7 +54,6 @@ const AddCar = () => {
         <div className="absolute bottom-[10%] left-[5%] w-56 h-56 rounded-full bg-gradient-to-r from-[#00F0FF] to-[#CCFF00] opacity-15 blur-lg animate-float-slow"></div>
       </div>
 
-      {/* --- মেইন গ্লাস morfism ফর্ম কার্ড --- */}
       <div className="relative z-10 w-full max-w-2xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-3xl shadow-2xl transition-all duration-300 hover:border-white/20">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold tracking-wide text-white">

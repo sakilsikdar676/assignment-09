@@ -1,12 +1,18 @@
-import { Default, DeleteAlart } from "@/src/app/components/DeleteAlart";
-import { EditModal } from "@/src/app/components/EditModal";
-
 import BookingModal from "../../components/BookingCard";
+import { auth } from "@/src/lib/auth";
+import { headers } from "next/headers";
 
 const CarDetailPage = async ({ params }) => {
   const { userId } = await params;
-
-  const res = await fetch(`http://localhost:8000/cars/${userId}`);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  
+  const res = await fetch(`http://localhost:8000/cars/${userId}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const carData = await res.json();
   const {
     carType,
